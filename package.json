@@ -1,0 +1,22 @@
+{
+  "name": "nodeflow-hierarchy-engine",
+  "version": "1.0.0",
+  "description": "NodeFlow — REST API and SPA for visualising directed-graph hierarchies, cycle detection, and tree depth analysis.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev":   "nodemon server/index.js"
+  },
+  "dependencies": {
+    "cors":    "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["hierarchy", "tree", "graph", "REST", "SRM"],
+  "author": "gladwinselwyn"
+}

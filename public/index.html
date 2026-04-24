@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NodeFlow · Hierarchy Visualiser</title>
+  <meta name="description" content="Submit node edge strings and instantly visualise the resulting tree hierarchies, cycles, and structural insights." />
+
+  <!-- Fonts: Outfit (headings) + Fira Code (monospace) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Decorative grid lines -->
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <!-- Floating orbs -->
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
+
+  <div class="shell">
+
+    <!-- ── Masthead ── -->
+    <header class="masthead">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="6"  r="3.5" fill="url(#g1)"/>
+            <circle cx="6"  cy="20" r="3.5" fill="url(#g1)"/>
+            <circle cx="22" cy="20" r="3.5" fill="url(#g1)"/>
+            <line x1="14" y1="9" x2="6"  y2="17" stroke="url(#g1)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="14" y1="9" x2="22" y2="17" stroke="url(#g1)" stroke-width="1.8" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#f97316"/>
+                <stop offset="1" stop-color="#a855f7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="brand-name">Node<span class="brand-accent">Flow</span></span>
+      </div>
+      <p class="masthead-caption">Hierarchy Analysis Engine &nbsp;·&nbsp; SRM Full Stack Challenge</p>
+    </header>
+
+    <!-- ── Input Panel ── -->
+    <main>
+      <section class="panel" id="input-panel">
+
+        <div class="panel-title-row">
+          <h1 class="panel-title">Edge Input</h1>
+          <span class="panel-hint">Format: <code>A-&gt;B</code></span>
+        </div>
+
+        <div class="field-wrap">
+          <label class="field-label" for="edge-input">Node Edges</label>
+          <textarea
+            id="edge-input"
+            class="edge-textarea"
+            placeholder="A->B&#10;A->C&#10;B->D&#10;X->Y&#10;Y->Z&#10;Z->X"
+            rows="9"
+            spellcheck="false"
+            autocomplete="off"
+          ></textarea>
+          <p class="field-note">One edge per line or comma-separated. Whitespace is trimmed automatically.</p>
+        </div>
+
+        <div class="action-bar">
+          <button id="btn-sample" class="btn btn-outline" onclick="fillSample()">Load Sample</button>
+          <button id="btn-reset"  class="btn btn-outline" onclick="resetAll()">Clear</button>
+          <button id="btn-run"    class="btn btn-run"     onclick="runAnalysis()">
+            <span class="btn-run-icon">&#9654;</span> Analyse
+          </button>
+        </div>
+
+        <div id="alert-box" class="alert-box hidden" role="alert">
+          <span class="alert-icon">&#9888;</span>
+          <span id="alert-text"></span>
+        </div>
+
+      </section>
+
+      <!-- ── Output Panel ── -->
+      <section id="output-panel" class="hidden">
+
+        <!-- Submitter strip -->
+        <div class="submitter-strip" id="submitter-strip">
+          <div class="submitter-field">
+            <span class="sf-label">User ID</span>
+            <span class="sf-val" id="out-uid"></span>
+          </div>
+          <div class="strip-rule"></div>
+          <div class="submitter-field">
+            <span class="sf-label">Email</span>
+            <span class="sf-val" id="out-email"></span>
+          </div>
+          <div class="strip-rule"></div>
+          <div class="submitter-field">
+            <span class="sf-label">Roll No.</span>
+            <span class="sf-val" id="out-roll"></span>
+          </div>
+        </div>
+
+        <!-- Stat row -->
+        <div class="stat-row" id="stat-row"></div>
+
+        <!-- Hierarchies section -->
+        <div class="section-label">
+          <span class="sl-dot sl-dot-green"></span> Hierarchies
+        </div>
+        <div id="hier-grid" class="hier-grid"></div>
+
+        <!-- Flags section -->
+        <div class="section-label">
+          <span class="sl-dot sl-dot-amber"></span> Flags
+        </div>
+        <div id="flags-wrap" class="flags-wrap"></div>
+
+        <!-- Raw toggle -->
+        <details class="raw-block">
+          <summary id="raw-toggle">Show raw JSON</summary>
+          <pre id="raw-output" class="raw-pre"></pre>
+        </details>
+
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      SRM Full Stack Engineering Challenge &nbsp;·&nbsp; NodeFlow Hierarchy Engine
+    </footer>
+
+  </div><!-- .shell -->
+
+  <script src="app.js"></script>
+</body>
+</html>
