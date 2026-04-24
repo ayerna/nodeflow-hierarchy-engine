@@ -1,11 +1,12 @@
 {
   "version": 2,
   "builds": [
-    { "src": "server/index.js", "use": "@vercel/node" }
+    { "src": "server/index.js", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/bfhl", "dest": "server/index.js" },
-    { "src": "/health", "dest": "server/index.js" },
-    { "src": "/(.*)", "dest": "public/$1" }
+    { "src": "/bfhl", "dest": "/server/index.js" },
+    { "src": "/health", "dest": "/server/index.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
