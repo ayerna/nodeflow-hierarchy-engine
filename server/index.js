@@ -42,6 +42,10 @@ app.get("/health", (_req, res) =>
 );
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`NodeFlow API  →  http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`NodeFlow API  →  http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
